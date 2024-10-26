@@ -10,11 +10,14 @@ import { CreateUserDTO } from './dots/create-user.dto';
 import { GetAllUsersDTO } from './dots/get-all-users.dto';
 import { APIresponse } from 'src/helpers/api-response';
 import { Request } from 'express';
+import { AccessLevel } from './access-level.enum';
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name) private readonly userModel: Model<User>,
-  ) {}
+  ) {
+   
+  }
   async createUser(createObj: CreateUserDTO): Promise<User> {
     try {
       const newUser = new this.userModel(createObj);

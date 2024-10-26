@@ -20,6 +20,27 @@ import { JwtService } from '@nestjs/jwt';
 export class UserAuthService {
   constructor(private readonly userService: UserService) {}
 
+  async createDefaultUsers() {
+    try {
+      const adminUser = await this.userService.createUser({
+        name: 'ahmed',
+        email: 'ahmed@gmail.com',
+        password: 'Aa123456789@',
+        access_level: AccessLevel.Admin,
+      });
+      await adminUser.save();
+      const readOnlyUser = await this.userService.createUser({
+        name: 'tarek',
+        email: 'tarek@gmail.com',
+        password: 'Aa123456789@',
+        access_level: AccessLevel.Admin,
+      });
+      await readOnlyUser.save();
+    } catch (err) {
+      throw new InternalServerErrorException(err);
+    }
+  }
+
   async signin(data: SignInDTO) {
     try {
       const user = await this.userService.getUserByEmail(data.email);

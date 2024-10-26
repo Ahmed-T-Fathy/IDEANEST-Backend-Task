@@ -33,4 +33,9 @@ export class UserAuthController {
   async refreshToken(@Body() data: RefreshTokenDTO) {
     return this.userAuthService.refreshToken(data.refresh_token);
   }
+
+  @Post('/create-default-users')
+  async createDefaultUsers() {
+    return this.userAuthService.createDefaultUsers();
+  }
 }
