@@ -29,7 +29,10 @@ export class UserAuthService {
       user.refreshToken = tokens.refresh_token;
       await user.save();
 
-      return tokens;
+      return {
+        message: 'success',
+        ...tokens,
+      };
     } catch (err) {
       throw new InternalServerErrorException(err);
     }
@@ -45,10 +48,13 @@ export class UserAuthService {
 
   async signup(data: SignupDTO) {
     try {
-      return await this.userService.createUser({
+      await this.userService.createUser({
         ...data,
         access_level: AccessLevel.Read_Only,
       });
+      return {
+        message: 'success',
+      };
     } catch (err) {
       throw new InternalServerErrorException(err);
     }
@@ -62,7 +68,10 @@ export class UserAuthService {
       user.refreshToken = tokens.refresh_token;
 
       await user.save();
-      return tokens;
+      return {
+        message: 'success',
+        ...tokens,
+      };
     } catch (err) {
       throw new InternalServerErrorException(err);
     }

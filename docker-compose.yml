@@ -1,0 +1,19 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    network_mode: host
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://localhost:27017/ideanest-db
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    network_mode: host
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ideanest
+      MONGO_INITDB_ROOT_PASSWORD: ideanest
+    restart: always

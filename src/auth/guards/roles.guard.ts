@@ -5,7 +5,7 @@ import { ACCESSLEVEL_KEY } from "../decorators/access-level.decorator";
 import { AccessLevel } from "../../user/access-level.enum";
 
 @Injectable()
-export class RolesGuard implements CanActivate{
+export class AccessLevelGuard implements CanActivate{
     constructor(private reflector :Reflector){}
     canActivate(context: ExecutionContext): boolean{
         const requiredAccessLevel = this.reflector.getAllAndOverride(
@@ -19,9 +19,7 @@ export class RolesGuard implements CanActivate{
         if(!requiredAccessLevel)return true;
         
         const {user}=context.switchToHttp().getRequest();
-        // console.log(requiredRoles);
-        // console.log(user);
-        // console.log(user.role);
+
         
         if (requiredAccessLevel.includes(user.access_level)) {
           return true;
