@@ -14,6 +14,7 @@ import { CreateUserDTO } from 'src/user/dots/create-user.dto';
 import { UserService } from 'src/user/user.service';
 import { SignupDTO } from './dtos/signup.dto';
 import { AccessLevel } from 'src/user/access-level.enum';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UserAuthService {
@@ -65,12 +66,23 @@ export class UserAuthService {
       const user = await this.userService.getUserByToken(refreshToken);
 
       const tokens = await user.generateToken();
-      user.refreshToken = tokens.refresh_token;
+      const refreshTokenSecret = process.env.JWT_REFRESH_TOKEN_SECRET;
 
-      await user.save();
+      if (!refreshTokenSecret) {
+        throw new Error('JWT secrets are not set in environment variables');
+      }
+      const newJwtService = new JwtService({
+        secret: refreshTokenSecret,
+      });
+      const valid = await newJwtService.verify(user.refreshToken);
+
+      const refresh_token = user.refreshToken;
+      const access_token = tokens.access_token;
+
       return {
         message: 'success',
-        ...tokens,
+        access_token,
+        refresh_token,
       };
     } catch (err) {
       throw new InternalServerErrorException(err);

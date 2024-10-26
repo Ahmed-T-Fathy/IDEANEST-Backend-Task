@@ -7,8 +7,12 @@ WORKDIR /app
 # Copy the package.json and package-lock.json (if available) into the container
 COPY package*.json ./
 
+RUN rm -rf node_modules/
+RUN rm -rf dist/
+
 # Install dependencies
 RUN npm install
+#RUN npm update
 
 # Copy the rest of the application source code into the container
 COPY . .

@@ -30,11 +30,12 @@ import { OrganizationModule } from './organization/organization.module';
     UserAuthModule,
     JwtModule.registerAsync({
       inject: [ConfigService],
+      global:true,
       useFactory: (config: ConfigService) => {
         return {
           global: true,
-          secret: config.get<string>('JWT_SECRET'),
-          signOptions: { expiresIn: config.get<string>('JWT_EXPIRESIN') },
+          secret: config.get<string>('JWT_ACCESS_TOKEN_SECRET'),
+          signOptions: { expiresIn: config.get<string>('JWT_ACCESS_TOKEN_EXPIRESIN') },
         };
       },
     }),

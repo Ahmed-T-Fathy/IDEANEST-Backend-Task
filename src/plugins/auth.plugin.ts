@@ -41,12 +41,16 @@ export const authPlugin = (schema: Schema) => {
 
   schema.methods.generateToken = async function () {
     const payload = { id: this._id };
-    const accessTokenSecret = process.env.JWT_SECRET;
-    const accessTokenexpiresIn = process.env.JWT_EXPIRESIN;
+    const accessTokenSecret = process.env.JWT_ACCESS_TOKEN_SECRET;
+    const accessTokenexpiresIn = process.env.JWT_ACCESS_TOKEN_EXPIRESIN;
+    const refreshTokenSecret =process.env.JWT_REFRESH_TOKEN_SECRET;
+    const refreshTokenexpiresIn = process.env.JWT_REFRESH_TOKEN_EXPIRESIN;
 
     if (
       !accessTokenSecret ||
-      !accessTokenexpiresIn 
+      !accessTokenexpiresIn ||
+      !refreshTokenSecret||
+      !refreshTokenexpiresIn
     ) {
       throw new Error('JWT secrets are not set in environment variables');
     }
@@ -54,8 +58,9 @@ export const authPlugin = (schema: Schema) => {
     const access_token = await jwt.sign(payload, accessTokenSecret, {
       expiresIn: accessTokenexpiresIn,
     });
-    const refresh_token = crypto.randomBytes(64).toString('hex');
-
+    const refresh_token =  await jwt.sign(payload, refreshTokenSecret, {
+      expiresIn: refreshTokenexpiresIn,
+    });
     return {
       access_token,
       refresh_token,

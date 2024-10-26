@@ -1,19 +1,30 @@
+version: '3.8'
+
 services:
   app:
     build:
       context: .
       dockerfile: Dockerfile
-    network_mode: host
     depends_on:
       - mongodb
     environment:
-      MONGODB_URI: mongodb://localhost:27017/ideanest-db
+      MONGODB_URI: mongodb://mongodb:27017/ideanest-db # Use service name 'mongodb'
     restart: always
-
+    ports:
+      - "8080:8080" # Mapping container port 8080 to host port 8080
+    volumes:
+#      - .:/app
+      - '.:/usr/src/app'
+      - /usr/src/app/node_modules/
   mongodb:
     image: mongo:latest
-    network_mode: host
     environment:
       MONGO_INITDB_ROOT_USERNAME: ideanest
       MONGO_INITDB_ROOT_PASSWORD: ideanest
     restart: always
+    ports:
+      - "27017:27017" # Mapping container port 27017 to host port 27017
+
+networks:
+  default:
+    driver: bridge
