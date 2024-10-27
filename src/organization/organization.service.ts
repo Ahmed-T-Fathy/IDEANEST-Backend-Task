@@ -11,14 +11,14 @@ import { Organization } from './organization.schema';
 import { CreateOrganizaitonDTO } from './dto/create-organization.dto';
 import { UpdateOrganizationDTO } from './dto/update-organization.dto';
 import { Request } from 'express';
-import { AccessLevel } from 'src/user/access-level.enum';
-import { checkQuery } from 'src/helpers/check-query';
-import { APIresponse } from 'src/helpers/api-response';
-import { User } from 'src/user/user.schema';
-import { UserService } from 'src/user/user.service';
+import { AccessLevel } from '../user/access-level.enum';
+import { checkQuery } from '../helpers/check-query';
+import { APIresponse } from '../helpers/api-response';
+import { User } from '../user/user.schema';
+import { UserService } from '../user/user.service';
 import { Model } from 'mongoose';
 import { Types } from 'mongoose';
-import { UserInRequest } from 'src/user-auth/user-auth.service';
+import { UserInRequest } from '../user-auth/user-auth.service';
 
 @Injectable()
 export class OrganizationService {

@@ -2,10 +2,10 @@ import { Body, Controller, Get, Post, Query, Request, UseGuards } from '@nestjs/
 import { CreateUserDTO } from './dots/create-user.dto';
 import { UserService } from './user.service';
 import { GetAllUsersDTO } from './dots/get-all-users.dto';
-import { AuthGaurd } from 'src/auth/guards/auth.guard';
-import { AccessLevels } from 'src/auth/decorators/access-level.decorator';
+import { AuthGaurd } from '../auth/guards/auth.guard';
+import { AccessLevels } from '../auth/decorators/access-level.decorator';
 import { AccessLevel } from './access-level.enum';
-import { AccessLevelGuard } from 'src/auth/guards/roles.guard';
+import { AccessLevelGuard } from '../auth/guards/roles.guard';
 
 @Controller('user')
 export class UserController {

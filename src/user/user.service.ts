@@ -8,7 +8,7 @@ import { User } from './user.schema';
 import { Model } from 'mongoose';
 import { CreateUserDTO } from './dots/create-user.dto';
 import { GetAllUsersDTO } from './dots/get-all-users.dto';
-import { APIresponse } from 'src/helpers/api-response';
+import { APIresponse } from '../helpers/api-response';
 import { Request } from 'express';
 import { AccessLevel } from './access-level.enum';
 @Injectable()

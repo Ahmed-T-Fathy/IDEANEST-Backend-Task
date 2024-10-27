@@ -11,18 +11,18 @@ import {
 } from '@nestjs/common';
 import { OrganizationService } from './organization.service';
 import { CreateOrganizaitonDTO } from './dto/create-organization.dto';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { CreateOrganizaitonSerializeDTO } from './dto/create-org-serialize.dto';
-import { MongooseIdDTO } from 'src/dtos/mongoose-id.dto';
-import { AuthGaurd } from 'src/auth/guards/auth.guard';
-import { AccessLevelGuard } from 'src/auth/guards/roles.guard';
-import { AccessLevels } from 'src/auth/decorators/access-level.decorator';
-import { AccessLevel } from 'src/user/access-level.enum';
+import { MongooseIdDTO } from '../dtos/mongoose-id.dto';
+import { AuthGaurd } from '../auth/guards/auth.guard';
+import { AccessLevelGuard } from '../auth/guards/roles.guard';
+import { AccessLevels } from '../auth/decorators/access-level.decorator';
+import { AccessLevel } from '../user/access-level.enum';
 import { OrganizationDTO } from './dto/organizaiton.dto';
 import { UpdateOrganizationDTO } from './dto/update-organization.dto';
 import { UpdateOrganizationSerializeDTO } from './dto/update-org-serialize.dto';
 import { Request } from 'express';
-import { UserInRequest } from 'src/user-auth/user-auth.service';
+import { UserInRequest } from '../user-auth/user-auth.service';
 import { InviteUserToOrganizationDTO } from './dto/invite-user-to-organization.dto';
 
 @Controller('organization')

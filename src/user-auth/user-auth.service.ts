@@ -6,14 +6,14 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { User } from 'src/user/user.schema';
+import { User } from '../user/user.schema';
 import { SignInDTO } from './dtos/signin.dto';
 import { access } from 'fs';
 import { Request } from 'express';
-import { CreateUserDTO } from 'src/user/dots/create-user.dto';
-import { UserService } from 'src/user/user.service';
+import { CreateUserDTO } from '../user/dots/create-user.dto';
+import { UserService } from '../user/user.service';
 import { SignupDTO } from './dtos/signup.dto';
-import { AccessLevel } from 'src/user/access-level.enum';
+import { AccessLevel } from '../user/access-level.enum';
 import { JwtService } from '@nestjs/jwt';
 
 @Injectable()

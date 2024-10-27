@@ -3,7 +3,7 @@ import { OrganizationService } from './organization.service';
 import { OrganizationController } from './organization.controller';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Organization, OrganizationSchema } from './organization.schema';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports:[MongooseModule.forFeatureAsync([

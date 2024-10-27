@@ -1,10 +1,10 @@
 import { Body, Controller, Get, Post, Req, UseGuards } from '@nestjs/common';
 import { UserAuthService } from './user-auth.service';
 import { SignInDTO} from './dtos/signin.dto';
-import { Serialize } from 'src/interceptors/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { GetUserDTO } from './dtos/get-user.dto';
 import { Request } from 'express';
-import { AuthGaurd } from 'src/auth/guards/auth.guard';
+import { AuthGaurd } from '../auth/guards/auth.guard';
 import { SignupDTO } from './dtos/signup.dto';
 import { RefreshTokenDTO } from './dtos/refresh-token.dto';
 
